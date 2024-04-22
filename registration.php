@@ -24,6 +24,7 @@ if (isset($_SESSION["user"])) {
         </div>
         
         <?php
+        $registration = "active";
         if (isset($_POST["submit"])) {
             $fullName = $_POST["fullname"];
             $email = $_POST["email"];
@@ -74,13 +75,16 @@ if (isset($_SESSION["user"])) {
                 if ($prepareStmt) {
                     mysqli_stmt_bind_param($stmt,"ssssssss",$fullName, $email, $passwordHash, $username, $role, $nid, $phone, $avatar);
                     mysqli_stmt_execute($stmt);
+                    $registration = "passive";
                     echo "<div class='alert alert-success mt-2'>You are registered successfully.</div>";
+
                 }else{
                     die("Something went wrong");
                 }    
                } 
         }       
         ?>
+        <?php if ($registration == "active") { ?>
         <form action="registration.php" method="post" class="mt-4">
             <div class="form-group">
                 <label for="fullname">Full Name:</label>
@@ -114,6 +118,9 @@ if (isset($_SESSION["user"])) {
                 <input type="submit" class="btn" style="background-color:#9d0858;color:#ffffff" value="Register" name="submit">
             </div>
         </form>
+        <?php } else { ?>
+            <div><p>Already registered <a href="login.php">Login Here</a></p></div>
+        <?php } ?>
     </div>
          
 </body>

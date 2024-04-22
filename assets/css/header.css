@@ -1,0 +1,81 @@
+.RailWayEasy-main-navigation {
+		margin-left: 50px;
+		width: calc(100% - 291px);
+	}
+
+	ul.nav-list-RailWayEasy {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		margin-top: 5px;
+	}
+
+	@media (max-width: 991px) {
+		.mean-nav ul li ol {
+			padding: 0;
+		}
+
+		.user-dropdown-submenu {
+			width: 100%;
+			padding: 20px 0;
+		}
+
+		.dropdown-user-info,
+		.user-dropdown-railway .user-related-links .single-url a,
+		p.drop-title-user {
+			padding: 0 5% !important;
+		}
+
+		.mean-container .mean-nav ul li.mean-last .railway-logged-user {
+			width: 100%;
+			color: #FFF !important;
+			padding: 1em 10% !important;
+			border-left: 0 !important;
+			border-bottom: 0 !important;
+			border-radius: 0 !important;
+			border-top: 1px solid rgba(255, 255, 255, .5) !important;
+			background-color: #96089d !important;
+		}
+
+		.user-dropdown-railway a .fa-chevron-up,
+		.user-dropdown-railway a .fa-chevron-down {
+			position: absolute;
+			right: 20px;
+		}
+
+		.user-dropdown-railway a:hover .fa-chevron-down {
+			display: none;
+		}
+
+		ul.nav-list-RailWayEasy {
+			display: block;
+		}
+	}
+
+	/* Train Link */
+	.train-icon {
+		width: 20px;
+		position: relative;
+		top: -4px;
+	}
+
+	.train-link:hover .train-icon {
+		display: none;
+	}
+
+	.train-link .train-icon-white {
+		display: none;
+	}
+
+	.train-link:hover .train-icon-white,
+	.current .train-icon-white {
+		display: inline !important;
+	}
+
+	.mean-nav .train-icon {
+		display: none !important;
+	}
+
+	.mean-nav .train-icon.train-icon-white {
+		display: inline !important;
+	}

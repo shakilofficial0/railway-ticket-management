@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION["user"])) {
-   header("Location: index.php");
+   header("Location: dashboard.php");
 }
 ?>
 <!DOCTYPE html>
@@ -15,7 +15,12 @@ if (isset($_SESSION["user"])) {
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container card">
+        <div class="d-flex justify-content-center justify-items-center w-50 m-auto">
+            <a href="index.php">
+            <img src="assets/images/logo.png" alt="logo" class="img-fluid">
+            </a>
+        </div>
         <?php
         if (isset($_POST["login"])) {
            $email = $_POST["email"];
@@ -28,7 +33,8 @@ if (isset($_SESSION["user"])) {
                 if (password_verify($password, $user["password"])) {
                     session_start();
                     $_SESSION["user"] = "yes";
-                    header("Location: index.php");
+                    $_SESSION["user_data"] = $user;
+                    header("Location: dashboard.php");
                     die();
                 }else{
                     echo "<div class='alert alert-danger'>Password does not match</div>";
@@ -38,12 +44,14 @@ if (isset($_SESSION["user"])) {
             }
         }
         ?>
-      <form action="login.php" method="post">
+      <form action="login.php" method="post" class="mt-4">
         <div class="form-group">
-            <input type="email" placeholder="Enter Email:" name="email" class="form-control">
+            <label for="email">Email</label>
+            <input type="email" placeholder="user@demo.com" name="email" class="form-control">
         </div>
         <div class="form-group">
-            <input type="password" placeholder="Enter Password:" name="password" class="form-control">
+            <label for="password">Password</label>
+            <input type="password" placeholder="********" name="password" class="form-control">
         </div>
         <div class="form-btn">
             <input type="submit" value="Login" name="login" class="btn btn-primary">
