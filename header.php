@@ -33,16 +33,16 @@
 
 
 					<li>
-						<a title="Home" href="https://train.RailWayEasy.com" class="train-link">
+						<a title="Home" href="/" class="train-link">
 							<img src="assets/images/home.svg" alt="Train Icon Dark" class="train-icon">Home</a>
 					</li>
 					<li>
-						<a title="All Trains" href="https://train.RailWayEasy.com" class="train-link">
+						<a title="All Trains" href="./all_trains.php" class="train-link">
 							<img src="assets/images/train-icon.svg" alt="Train Icon Dark" class="train-icon">All
 							Trains</a>
 					</li>
 					<li>
-						<a title="Train Stations" href="/ticket_history.php" class="train-link">
+						<a title="Train Stations" href="./ticket_history.php" class="train-link">
 							<img src="assets/images/station.svg" alt="Train Icon Dark" class="train-icon">Ticket History</a>
 					</li>
 					<li>
@@ -51,7 +51,7 @@
 							Schedule</a>
 					</li>
 					<li>
-						<a title="Book Now" href="https://train.RailWayEasy.com" class="train-link">
+						<a title="Book Now" href="./dashboard.php" class="train-link">
 							<img src="assets/images/ticket.svg" alt="Train Icon Dark" class="train-icon">BookNow</a>
 					</li>
 

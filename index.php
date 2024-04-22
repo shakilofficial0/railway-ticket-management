@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -573,7 +577,7 @@
 		<div class="service-block">
 			<div class="site-wrapper clearfix">
 				<div class="tab-top-content">
-					<a href="book_now_page.html" class="book-now-button">Book Now</a>
+					<a href="./dashboard.php" class="book-now-button">Book Now</a>
 					<h2>Introducing you to the RailWayEasy way of life</h2>
 					<h5>A one-stop solution for your travel needs</h5>
 				</div>
