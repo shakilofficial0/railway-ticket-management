@@ -2,6 +2,7 @@
 session_start();
 if (!isset($_SESSION["user"])) {
    header("Location: login.php");
+   die();
 }
 ?>
 
@@ -39,7 +40,7 @@ if (!isset($_SESSION["user"])) {
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12 col-12">
 				<h2 class="text-center mt-5">Ticket History</h2>
 				<div class="table-responsive">
 					<table class="table  mt-5">
@@ -50,18 +51,19 @@ if (!isset($_SESSION["user"])) {
 								<th>From</th>
 								<th>To</th>
 								<th>Departure</th>
-								<th>Arrival</th>
 								<th>Price</th>
-								<th>Seat</th>
+								<th>Seat Number</th>
+								<th>Seat Type</th>
 								<th>Status</th>
 							</tr>
 						</thead>
 						<tbody>
 
 
-							<?php
+						<?php
                   require_once "database.php";
                   $user_id = $_SESSION["user_data"]["id"];
+
                   $sql = "SELECT * FROM tickets WHERE user_id = $user_id";
                   $result = mysqli_query($conn, $sql);
                   while ($ticket = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
