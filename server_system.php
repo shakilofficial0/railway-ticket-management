@@ -27,11 +27,56 @@ if(isset($_POST['action']) && $_POST['action'] == 'search_train'){
 	  $result = mysqli_query($conn, $sql);
 	  $end_station = mysqli_fetch_array($result, MYSQLI_ASSOC);
 	  $trains[$key]['end_station'] = $end_station['name'];
-	  
+
    }
    echo json_encode($trains);
    
 
+}
+
+if(isset($_POST['action']) && $_POST['action'] == 'book_ticket'){
+	$train_id = htmlspecialchars($_POST['train_id']);
+   $seat_type = htmlspecialchars($_POST['seat_type']);
+   $seat_number = (int)htmlspecialchars($_POST['num_seats']);
+   $from_station = htmlspecialchars($_POST['book_from_station']);
+   $to_station = htmlspecialchars($_POST['book_to_station']);
+   $total_fare = htmlspecialchars($_POST['total_fare']);
+
+	// if ticket available
+	$sql = "SELECT * FROM `train_schedule` WHERE id = $train_id";
+	$result = mysqli_query($conn, $sql);
+	$train = mysqli_fetch_array($result, MYSQLI_ASSOC);
+	$available_seats = json_decode($train['ticket_availablity']);
+	if($available_seats->$seat_type < $seat_number){
+	  echo json_encode(['status' => 'error', 'message' => 'Seats not available']);
+	  die();
+	}
+	// book ticket
+	$temp_data = (int)$available_seats->$seat_type ;
+	$available_seats->$seat_type -= $seat_number;
+	$seat_number_data = '';
+	for ($i=$temp_data; $i > $available_seats->$seat_type; $i--) { 
+		$seat_number_data .= $i;
+		if($i != $available_seats->$seat_type+1){
+			$seat_number_data .= ',';
+		}
+	}
+	$available_seats = json_encode($available_seats);
+	$sql = "UPDATE `train_schedule` SET ticket_availablity = '$available_seats' WHERE id = $train_id";
+	$result = mysqli_query($conn, $sql);
+	$user_id = $_SESSION["user_data"]["id"];
+	
+	// $sql = "INSERT INTO `tickets` (user_id, train_id, seat_type, ticket_count, seat_number, from_station, to_station, ticket_price) VALUES ($user_id, $train_id, '$seat_type', $seat_number, $seat_number_data, '$from_station', '$to_station', '$total_fare')";
+
+	$sql = "INSERT INTO `tickets` (user_id, train_id, seat_type, ticket_count, seat_number, from_station, to_station, ticket_price) VALUES ($user_id, $train_id, '$seat_type', $seat_number, '$seat_number_data', '$from_station', '$to_station', '$total_fare')";
+	$result = mysqli_query($conn, $sql);
+
+
+   if($result){
+	  echo json_encode(['status' => 'success', 'message' => 'Ticket Booked Successfully']);
+   }else{
+	  echo json_encode(['status' => 'error', 'message' => 'Failed to Book Ticket']);
+   }
 }
 
 ?>

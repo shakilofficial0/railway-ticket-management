@@ -13,7 +13,7 @@ if (!isset($_SESSION["user"])) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>But Your Ticket - Railway Management System</title>
+	<title>Buy Your Ticket - Railway Management System</title>
 	<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
 		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -154,6 +154,9 @@ if (!isset($_SESSION["user"])) {
 									<form id="bookTicketForm">
 										<input type="hidden" name="action" value="book_ticket">
 										<input type="hidden" name="train_id" id="train_id">
+										<input type="hidden" name="book_from_station" id="book_from_station">
+										<input type="hidden" name="book_to_station" id="book_to_station">
+
 										<div class="form-group">
 											<label for="seat_number">Seat Type</label>
 											<select name="seat_type" id="seat_type" class="form-control" required>
@@ -162,13 +165,18 @@ if (!isset($_SESSION["user"])) {
 										</div>
 										<div class="form-group">
 											<label for="seat_number">Number of Seats: <span id="num_seats_label" class="text-muted">1</span></label>
-											<input type="range" class="form-range" min="1" max="5" step="1" id="num_seats" name="num_seats">
+											<input type="range" class="form-range" min="0" max="4" step="1" id="num_seats" name="num_seats">
+										</div>
+
+										<div class="form-group">
+											Totat Fare: <span id="total_fare" class="text-danger">0</span>
+											<input type="hidden" name="total_fare" id="total_fare_input">
 										</div>
 									</form>
 								</div>
 								<div class="modal-footer">
 									
-									<button type="button" class="btn btn-primary" id="confirmBookingBtn">Confirm
+									<button type="button" class="btn btn-primary" id="confirmBookingBtn" disabled>Confirm
 										Booking</button>
 								</div>
 							</div>
@@ -191,6 +199,28 @@ if (!isset($_SESSION["user"])) {
 	<script src="assets/js/jquery.simpleselect.min.js"></script>
 	<script src="assets/js/aos.js"></script>
 	<script src="assets/js/functions.js"></script>
+	<script>
+		<?php
+		require_once 'database.php';
+
+		//get route name
+		$sql = "SELECT * FROM `routes`";
+		$result = mysqli_query($conn, $sql);
+		$routes = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		
+
+
+
+		?>
+
+		var routesk = <?php echo json_encode($routes); ?>;
+		var routes = {};
+
+		$.each(routesk, function(index, value){
+			routes[value.id] = value;
+			
+		});
+	</script>
 	<script src="assets/js/dashboard.js"></script>
 
 	<script type="text/javascript">

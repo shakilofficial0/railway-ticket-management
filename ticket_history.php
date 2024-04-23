@@ -64,7 +64,7 @@ if (!isset($_SESSION["user"])) {
                   require_once "database.php";
                   $user_id = $_SESSION["user_data"]["id"];
 
-                  $sql = "SELECT * FROM tickets WHERE user_id = $user_id";
+                  $sql = "SELECT * FROM tickets WHERE user_id = $user_id ORDER BY id DESC";
                   $result = mysqli_query($conn, $sql);
                   while ($ticket = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                      // Get train name Start
