@@ -42,9 +42,13 @@
 								Trains</a>
 						</li>
 						<li>
-							<a title="Train Stations" href="./ticket_history.php" class="train-link">
+							<a title="Ticket History" href="./ticket_history.php" class="train-link">
 								<img src="assets/images/station.svg" alt="Train Icon Dark" class="train-icon">Ticket
 								History</a>
+						</li>
+						<li>
+							<a title="Ticket Verify" href="./ticket_verify.php" class="train-link">
+								<img src="assets/images/schedule.svg" alt="Train Icon Dark" class="train-icon">Ticket Verify</a>
 						</li>
 						
 						<li>
